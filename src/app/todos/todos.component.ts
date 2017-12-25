@@ -14,28 +14,28 @@ export class TodosComponent implements OnInit {
 
   ngOnInit() {
     this.todoService.getTodos().subscribe((todos: Array<any>) => {
-      this.todos = todos
-    })
+      this.todos = todos;
+    });
   }
 
-  addTodo(event, text){
+  addTodo(event, text) {
     if (event.which === 13) {
-      let todo: Todo = new Todo({text: text, isCompleted: false});
-      this.todoService.saveTodo(todo).subscribe((todo: Todo) => this.todos.push(todo))
+      const todo: Todo = new Todo({text: text, isCompleted: false});
+      this.todoService.saveTodo(todo).subscribe((todo: Todo) => this.todos.unshift(todo));
     }
   }
-  updateStatus(todo: Todo){
+  updateStatus(todo: Todo) {
     this.todoService.updateTodo(todo).subscribe(res => console.log(res));
   }
   // TODO unfinished
-  public updateTodoText(a, b){}
-  public setEditState(a, b){}
-  deleteTodo(todo: Todo){
+  updateTodoText(a, b) { }
+  public setEditState(a, b) { }
+  deleteTodo(todo: Todo) {
     this.todoService.deleteTodo(todo._id).subscribe(res => {
       if (res.ok) {
         this.todos = this.todos.filter(t => t._id !== todo._id);
       }
-    })
+    });
   }
 
 }

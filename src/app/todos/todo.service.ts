@@ -8,8 +8,7 @@ import {Todo} from './todo';
 @Injectable()
 export class TodoService {
 
-  url: string = "/api";
-
+  url = '/api';
   constructor(private http: HttpClient) { }
 
   /**
@@ -21,7 +20,7 @@ export class TodoService {
         map(todos => todos as Todo[]),
         tap(todos => this.log('fetched todos')),
         catchError(this.handleError('getTodos', []))
-      )
+      );
   }
 
   /**
@@ -33,7 +32,7 @@ export class TodoService {
       .pipe(
         tap(todo => this.log(`fetched todo with id: ${_id}`)),
         catchError(this.handleError('getTodo', []))
-      )
+      );
   }
 
   /**
@@ -46,7 +45,7 @@ export class TodoService {
         map(todo => todo as Todo),
         tap(todo => this.log(`Saved todo: ${todo.text}`)),
         catchError(this.handleError('getTodo', []))
-      )
+      );
   }
 
   /**

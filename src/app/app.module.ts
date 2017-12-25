@@ -7,12 +7,14 @@ import { TodosComponent } from './todos/todos.component';
 import {TodoService} from './todos/todo.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent
+    TodosComponent,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
