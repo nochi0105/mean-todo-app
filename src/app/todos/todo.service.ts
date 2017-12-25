@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {Todo} from './todo';
+import {Todo, TodoInterface} from './todo';
 
 @Injectable()
 export class TodoService {
@@ -12,12 +12,11 @@ export class TodoService {
   constructor(private http: HttpClient) { }
 
   /**
-   * @returns {Observable<Todo[]>}
+   * @returns {Observable<TodoInterface[]>}
    */
-  getTodos(): Observable<Todo[]>{
-    return this.http.get<Todo[]>(`${this.url}/todos`)
+  getTodos(): Observable<TodoInterface[]> {
+    return this.http.get<TodoInterface[]>(`${this.url}/todos`)
       .pipe(
-        map(todos => todos as Todo[]),
         tap(todos => this.log('fetched todos')),
         catchError(this.handleError('getTodos', []))
       );
@@ -39,27 +38,24 @@ export class TodoService {
    * @param {Todo} todo
    * @returns {Observable<Todo>}
    */
-  saveTodo(todo: Todo): Observable<any> {
-    return this.http.post<Todo>(`${this.url}/todo`, todo)
+  saveTodo(todo: TodoInterface): Observable<any> {
+    return this.http.post(`${this.url}/todo`, todo)
       .pipe(
-        map(todo => todo as Todo),
-        tap(todo => this.log(`Saved todo: ${todo.text}`)),
+        tap(() => this.log(`Saved todo: ${todo.text}`)),
         catchError(this.handleError('getTodo', []))
       );
   }
 
   /**
-   *
-   * @param {Todo} todo
-   * @returns {Observable<Todo>}
+   * @param {TodoInterface} todo
+   * @returns {Observable<any>}
    */
-  updateTodo(todo: Todo): Observable<any>{
-    console.log(todo);
+  updateTodo(todo: TodoInterface): Observable<any> {
     return this.http.put(`${this.url}/todo/${todo._id}`, todo)
       .pipe(
-        tap(todo => this.log(`Updated todo with id`)),
+        tap(() => this.log(`Updated todo with id${todo._id}`)),
         catchError(this.handleError('updateTodo', []))
-      )
+      );
   }
 
   /**
@@ -69,9 +65,9 @@ export class TodoService {
   deleteTodo(_id: string): Observable<any>{
     return this.http.delete(`${this.url}/todo`, {params: {_id: _id}})
       .pipe(
-        tap(todo => this.log(`Deleted todo with id: ${_id}`)),
+        tap(() => this.log(`Deleted todo with id: ${_id}`)),
         catchError(this.handleError('deleteTodo', []))
-      )
+      );
   }
 
   /**
@@ -79,14 +75,14 @@ export class TodoService {
    * @param {T} result
    * @returns {(error: any) => Observable<T>}
    */
-  private handleError<T> (operation='operation', result?: T) {
+  private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
 
       this.log(`${operation} failed: ${error.message}`);
 
       return of(result as T);
-    }
+    };
   }
 
   /**

@@ -78,7 +78,7 @@ router.put('/todo/:id', (req, res, next) => {
   }
 
   db.todos.update({
-      _id: req.params.id
+      _id: mongojs.ObjectId(req.params.id)
     }, updObj, {},
     (err, todo) => {
       if (err) {
@@ -96,7 +96,7 @@ router.delete('/todo', (req, res, next) => {
   const id = req.query._id;
   if (id === 'undefined') return;
   db.todos.remove({
-      _id: id
+      _id: mongojs.ObjectId(id)
     }, '',
     (err, resutl) => {
       if (err) {
