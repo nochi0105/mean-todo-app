@@ -8,7 +8,7 @@ git clone https://github.com/nochi0105/mean-todo-app.git && cd mean-todo-app
 
 ## ２．step2
 ```
-npm install -g angular-cli
+npm install -g @angular/cli@latest
 ```
 
 ## ３．step3
