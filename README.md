@@ -1,6 +1,5 @@
 # Mean-todo
-<https://dotennin.ml/2017/12/22/angular2%E3%81%A8nodejs%E3%81%A7mean%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F>
-<reference>
+[test](https://dotennin.ml/2017/12/22/angular2%E3%81%A8nodejs%E3%81%A7mean%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F)
 
 
 ## １．step1
