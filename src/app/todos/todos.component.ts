@@ -29,7 +29,9 @@ export class TodosComponent implements OnInit {
   }
   // TODO unfinished
   updateTodoText(a, b) { }
-  public setEditState(a, b) { }
+  public setEditState(todo: Todo, isEditMode: boolean) {
+    todo.isEditMode = isEditMode;
+  }
   deleteTodo(todo: Todo) {
     this.todoService.deleteTodo(todo._id).subscribe(res => {
       if (res.ok) {

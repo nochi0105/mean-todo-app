@@ -7,14 +7,14 @@ export interface TodoInterface {
 export class Todo implements TodoInterface {
   _id: string;
   text: string;
-  isComplated: boolean = false;
-
+  isCompleted = false;
+  isEditMode = false;
   /**
    * @param {TodoInterface} todoInterface
    */
-  constructor(todoInterface: TodoInterface){
+  constructor(todoInterface: TodoInterface) {
     this._id = todoInterface._id || (new Date()).getTime().toString();
     this.text = todoInterface.text;
-    this.isComplated = !!todoInterface.isCompleted;
+    this.isCompleted = !!todoInterface.isCompleted;
   }
 }
