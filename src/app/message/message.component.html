@@ -1,0 +1,20 @@
+<div *ngIf="messages.length > 0">
+  <div class="bs-success" *ngFor="let message of messages">
+    <div *ngIf="message.type === 'info'" class="alert alert-info fade in">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <strong>Info!</strong> {{message.message}}
+    </div>
+    <div *ngIf="message.type === 'success'" class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> {{message.message}}
+    </div>
+    <div *ngIf="message.type === 'error'" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <strong>Error!</strong> {{message.message}}
+    </div>
+    <div *ngIf="message.type === 'warning'" class="alert alert-warning fade in">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <strong>Warning!</strong> {{message.message}}
+    </div>
+</div>
+</div>

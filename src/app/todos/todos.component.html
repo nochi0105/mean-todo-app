@@ -1,14 +1,13 @@
-<div class="row col-md-12">
-  <div>
-    <input class="form-control input-lg" placeholder="Add a Todo" autofocus #todotext (keyup)="addTodo($event, todotext.value)">
+<div class="container">
+  <div class="row col-md-12">
+    <div>
+      <input class="form-control input-lg" placeholder="Add a Todo" autofocus #todotext (keyup)="addTodo($event, todotext.value)">
+    </div>
   </div>
 </div>
-<div class="row col-md-12 todos">
+<div class="row col-md-12">
   <br>
-  <div class="alert alert-info text-center" [hidden]="todos.length > 0">
-    <h3>No Todos yet!</h3>
-  </div>
-  <div *ngFor="let todo of todos | orderBy: '_id': 'desc'" class="col-md-12 col-sm-12 col-xs-12 todo" [class.strike]="todo.isCompleted">
+  <div *ngFor="let todo of todos | orderBy: '_id': 'desc'" class="col-md-12 col-sm-12 col-xs-12 todo box-shadow" [class.strike]="todo.isCompleted">
     <div class="col-md-1 col-sm-1 col-xs-1">
       <input type="checkbox" [(ngModel)]="todo.isCompleted" (change)="updateStatus(todo)">
     </div>
@@ -23,4 +22,3 @@
     </div>
   </div>
 </div>
-

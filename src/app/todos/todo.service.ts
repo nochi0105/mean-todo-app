@@ -4,12 +4,13 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {Todo, TodoInterface} from './todo';
+import {MessageService} from '../message/message.service';
 
 @Injectable()
 export class TodoService {
 
   url = '/api';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
   /**
    * @returns {Observable<TodoInterface[]>}
@@ -41,7 +42,7 @@ export class TodoService {
   saveTodo(todo: TodoInterface): Observable<any> {
     return this.http.post(`${this.url}/todo`, todo)
       .pipe(
-        tap(() => this.log(`Saved todo: ${todo.text}`)),
+        tap(() => this.success(`Saved todo: ${todo.text}`)),
         catchError(this.handleError('getTodo', []))
       );
   }
@@ -53,7 +54,7 @@ export class TodoService {
   updateTodo(todo: TodoInterface): Observable<any> {
     return this.http.put(`${this.url}/todo/${todo._id}`, todo)
       .pipe(
-        tap(() => this.log(`Updated todo with id${todo._id}`)),
+        tap(() => this.success(`Updated todo with id${todo._id}`)),
         catchError(this.handleError('updateTodo', []))
       );
   }
@@ -62,10 +63,10 @@ export class TodoService {
    * @param {number} _id
    * @returns {Observable<any>}
    */
-  deleteTodo(_id: string): Observable<any>{
+  deleteTodo(_id: string): Observable<any> {
     return this.http.delete(`${this.url}/todo`, {params: {_id: _id}})
       .pipe(
-        tap(() => this.log(`Deleted todo with id: ${_id}`)),
+        tap(() => this.success(`Deleted todo with id: ${_id}`)),
         catchError(this.handleError('deleteTodo', []))
       );
   }
@@ -78,17 +79,26 @@ export class TodoService {
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-
-      this.log(`${operation} failed: ${error.message}`);
-
+      this.error(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }
-
   /**
    * @param {string} message
    */
   private log(message: string) {
-    console.log(message);
+    this.messageService.add({type: 'info', message: message});
+  }
+  /**
+   * @param {string} message
+   */
+  private error(message: string) {
+    this.messageService.add({type: 'error', message: message});
+  }
+  /**
+   * @param {string} message
+   */
+  private success(message: string) {
+    this.messageService.add({type: 'success', message: message});
   }
 }
