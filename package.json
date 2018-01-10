@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && node server.js",
-    "build": "ng build --prod && node server.js",
+    "start": "nodemon",
+    "build": "ng build --prod && nodemon server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -28,6 +28,7 @@
     "jquery": "^3.2.1",
     "mongojs": "^2.4.1",
     "ngx-bootstrap": "^2.0.0-rc.0",
+    "nodemon": "^1.14.10",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
