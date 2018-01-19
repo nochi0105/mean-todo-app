@@ -1,6 +1,6 @@
 {
-  "watch": ["src"],
-  "ext": "ts, html, scss, css",
+  "watch": ["src", "server"],
+  "ext": "ts, html, scss, css, js",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "ng build && node server.js"
+  "exec": "node server.js"
 }
