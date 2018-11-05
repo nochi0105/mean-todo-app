@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "build:prod": "ng build --build-optimizer --environment=prod --extract-css --output-hashing=all --aot --vendor-chunk --common-chunk && node server.js",
-    "build:dev": "ng build -dev && node server.js",
+    "build": "ng build -prod -bh=./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
